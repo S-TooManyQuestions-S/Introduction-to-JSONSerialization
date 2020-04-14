@@ -19,7 +19,10 @@ namespace JSONSerialization
         {
             return (ConsoleColor)(rand.Next(Enum.GetNames(typeof(ConsoleColor)).Length));
         }
-
+        /// <summary>
+        /// Метод получает из консоли длину массива
+        /// </summary>
+        /// <returns>Целое число</returns>
         private static int GetLengthInput()
         {
             int res;
@@ -42,24 +45,30 @@ namespace JSONSerialization
                 // Перенаправляем стандартный поток вывода
 
                 Console.OutputEncoding = System.Text.Encoding.Unicode;
+                
+                // Показываем меню
                 ShowMenu();
-
 
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.SetCursorPosition(0, 35);
+
                 //Повтор решения
                 Console.WriteLine("Для повтора программы нажмите Enter, для выхода - любую другую клавишу");
             } while (Console.ReadKey(true).Key == ConsoleKey.Enter);
         }
-
+        /// <summary>
+        /// Метод выводит в консоль меню, в котором управление происходит стрелками
+        /// </summary>
         public static void ShowMenu()
-        {
+        {   
+            // Варианты выбора меню
             int ind = 0;
             string[] fields = { "Использовать структуру", "Использовать класс", "FoRtNiTe DaNcE" };
 
             do
             {
                 Console.Clear();
+                // Отображаем меню
                 Console.WriteLine("Меню:");
                 for (int i = 0; i < fields.Length; i++)
                 {
@@ -69,6 +78,7 @@ namespace JSONSerialization
                     }
                     else if (i == fields.Length - 1)
                     {
+                        // Секретная вкладка
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.WriteLine("[ ] FoRtNiTe DaNcE");
                         Console.ResetColor();
@@ -98,6 +108,7 @@ namespace JSONSerialization
                 }
             } while (true);
 
+            // Обрабатываем выбор пользователя
             switch (ind)
             {
                 case 0:
@@ -111,11 +122,15 @@ namespace JSONSerialization
                     break;
             }
         }
-
+        /// <summary>
+        /// Метод использует структуру ConsoleSimbolStruct для хранения символов
+        /// </summary>
         public static void UseSctruct()
         {
+            // Получаем длину массивы из консоли
             int ArrayLength = GetLengthInput();
 
+            // Основная работа программы
             DateTime dt = DateTime.Now;
             Console.WriteLine("Начало наблюдения.");
             Console.WriteLine(dt + "; " + dt.Millisecond + " Milliseconds");
@@ -142,13 +157,18 @@ namespace JSONSerialization
                 Thread.Sleep(50); // using System.Threading;
             }
 
+            // Сериализуем массив цветов
             Serialize(arr);
         }
-
+        /// <summary>
+        /// Метод использует класс ConsoleSimbolClass для хранения символов
+        /// </summary>
         public static void UseClass()
         {
+            // Получаем длину массивы из консоли
             int ArrayLength = GetLengthInput();
 
+            // Основная работа программы
             DateTime dt = DateTime.Now;
             Console.WriteLine("Начало наблюдения.");
             Console.WriteLine(dt + "; " + dt.Millisecond + " Milliseconds");
@@ -175,16 +195,21 @@ namespace JSONSerialization
                 Thread.Sleep(50); // using System.Threading;
             }
 
+            // Сериализуем массив цветов
             Serialize(arr);
         }
-
+        /// <summary>
+        /// Метод выводит на экран Fortnite Dance со звуковыми эффектами
+        /// </summary>
         public static void Fortnite()
         {
+            // Воспроизводим музыку
             player = new MediaPlayer();
             player.Open(new Uri(@"../../Fortnite.mp3", UriKind.Relative));
             player.Volume = 0.1;
             player.Play();
             int frame = 0;
+            // Количество кадров FortniteDance
             while (frame < 35)
             {
                 Console.Clear();
@@ -192,13 +217,20 @@ namespace JSONSerialization
                 Thread.Sleep(100);
             }
         }
+        /// <summary>
+        /// Метод сериализует массив использованных цветов для вывода в консоль
+        /// </summary>
+        /// <param name="objs">Массив цветов</param>
         public static void Serialize(RGB[] objs)
         {
+            // Создаем json сериалайзер
             var ser = new DataContractJsonSerializer(typeof(RGB[]));
             try
             {
+                // Открываем поток с доступом к записи в файл
                 using (FileStream stream = new FileStream("serialize.json", FileMode.OpenOrCreate,FileAccess.Write))
                 {
+                    // Сериализуем в файл
                     ser.WriteObject(stream, objs);
                 }
             }

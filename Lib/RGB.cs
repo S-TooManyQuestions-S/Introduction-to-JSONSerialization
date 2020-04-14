@@ -13,7 +13,10 @@ namespace Lib
         public string name;
         [DataMember]
         public byte r, g, b; 
-        
+        /// <summary>
+        /// Параметрический конструктор
+        /// </summary>
+        /// <param name="x">Название цвета</param>
         public RGB (string x)
         {
             name = x;
@@ -22,6 +25,11 @@ namespace Lib
             g = rgb[1];
             b = rgb[2];
         }
+        /// <summary>
+        /// Метод возвращает RGB цвета по имени цвета
+        /// </summary>
+        /// <param name="x">Название цвета</param>
+        /// <returns>Массив из трех byte, соответствующих RGB значениям цвета</returns>
         public byte[] GetRgbValues(string x)
         {
             Color clr = Color.FromName(x);
