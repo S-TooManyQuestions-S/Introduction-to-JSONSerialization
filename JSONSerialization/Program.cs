@@ -39,6 +39,8 @@ namespace JSONSerialization
 
         static void Main(string[] args)
         {
+            //File.Delete("log.txt"); // Удаление старых логов (если мешает)
+            File.AppendAllText("log.txt", "Начало работы.\r\n\r\n\r\n");
             do
             {
                 Console.Clear();
@@ -55,6 +57,10 @@ namespace JSONSerialization
                 //Повтор решения
                 Console.WriteLine("Для повтора программы нажмите Enter, для выхода - любую другую клавишу");
             } while (Console.ReadKey(true).Key == ConsoleKey.Enter);
+            
+            Console.Clear();
+            Console.WriteLine("Хорошего дня!");
+            File.AppendAllText("log.txt", "Завершение работы.\r\n\r\n\r\n");
         }
         /// <summary>
         /// Метод выводит в консоль меню, в котором управление происходит стрелками
@@ -92,6 +98,7 @@ namespace JSONSerialization
                 Console.WriteLine();
                 Console.WriteLine("Для перемещения используйте стрелки вверх/вниз");
                 Console.WriteLine("Для выбора - Enter");
+
                 //Обработка нажатий клавиш
                 var key = Console.ReadKey(true).Key;
                 if (key == ConsoleKey.UpArrow)
@@ -113,12 +120,15 @@ namespace JSONSerialization
             {
                 case 0:
                     UseSctruct();
+                    Logger.LogWC("Пользователь начинает работу со структурой.");
                     break;
                 case 1:
                     UseClass();
+                    Logger.LogWC("Пользователь начинает работу с классом.");
                     break;
                 case 2:
                     Fortnite();
+                    Logger.LogWC("Пользователь играет в Fortnite и ему пора в дурку.");
                     break;
             }
         }
@@ -129,20 +139,25 @@ namespace JSONSerialization
         {
             // Получаем длину массивы из консоли
             int ArrayLength = GetLengthInput();
+            Logger.LogWC("Количество элементов в массиве: " + ArrayLength);
 
             // Основная работа программы
             DateTime dt = DateTime.Now;
-            Console.WriteLine("Начало наблюдения.");
-            Console.WriteLine(dt + "; " + dt.Millisecond + " Milliseconds");
+            
+            Logger.Log("Начало наблюдения.");
+            Logger.Log(dt + "; " + dt.Millisecond + " Milliseconds");
+            
             ConsoleSimbolStruct[] chars = new ConsoleSimbolStruct[ArrayLength];
             for (int i = 0; i < ArrayLength; i++)
             {
                 chars[i] = new ConsoleSimbolStruct('*',
                                                   rand.Next(30), rand.Next(30));
             }
-            Console.WriteLine("Конец наблюдения.");
-            dt = DateTime.Now;
-            Console.WriteLine(dt + "; " + dt.Millisecond + " Milliseconds");
+            
+            Logger.Log("Конец наблюдения.");
+            DateTime dt_new = DateTime.Now;
+            Logger.Log(dt_new + "; " + dt_new.Millisecond + " Milliseconds");
+            Logger.Log("Время наблюдения: " + (dt_new.Millisecond - dt.Millisecond) + " Milliseconds");
 
             RGB[] arr = new RGB[ArrayLength];
             for (int i = 0; i < ArrayLength; i++)
@@ -152,7 +167,7 @@ namespace JSONSerialization
                 arr[i] = new RGB(color.ToString());
 
                 Console.ForegroundColor = color;
-                Console.SetCursorPosition(chars[i].X, chars[i].Y + 4);
+                Console.SetCursorPosition(chars[i].X, chars[i].Y + 5);
                 Console.Write(chars[i].Simb);
                 Thread.Sleep(50); // using System.Threading;
             }
@@ -160,6 +175,7 @@ namespace JSONSerialization
             // Сериализуем массив цветов
             Serialize(arr);
         }
+        
         /// <summary>
         /// Метод использует класс ConsoleSimbolClass для хранения символов
         /// </summary>
@@ -167,20 +183,24 @@ namespace JSONSerialization
         {
             // Получаем длину массивы из консоли
             int ArrayLength = GetLengthInput();
+            Logger.LogWC("Количество элементов в массиве: " + ArrayLength);
 
             // Основная работа программы
             DateTime dt = DateTime.Now;
-            Console.WriteLine("Начало наблюдения.");
-            Console.WriteLine(dt + "; " + dt.Millisecond + " Milliseconds");
+            Logger.Log("Начало наблюдения.");
+            Logger.Log(dt + "; " + dt.Millisecond + " Milliseconds");
+            
             ConsoleSimbolClass[] chars = new ConsoleSimbolClass[ArrayLength];
             for (int i = 0; i < ArrayLength; i++)
             {
                 chars[i] = new ConsoleSimbolClass('*',
                                                   rand.Next(30), rand.Next(30));
             }
-            Console.WriteLine("Конец наблюдения.");
-            dt = DateTime.Now;
-            Console.WriteLine(dt + "; " + dt.Millisecond + " Milliseconds");
+            
+            Logger.Log("Конец наблюдения.");
+            DateTime dt_new = DateTime.Now;
+            Logger.Log(dt_new + "; " + dt_new.Millisecond + " Milliseconds");
+            Logger.Log("Время наблюдения: " + (dt_new.Millisecond - dt.Millisecond) + " Milliseconds");
 
             RGB[] arr = new RGB[ArrayLength];
             for (int i = 0; i < ArrayLength; i++)
@@ -190,7 +210,7 @@ namespace JSONSerialization
                 arr[i] = new RGB(color.ToString());
 
                 Console.ForegroundColor = color;
-                Console.SetCursorPosition(chars[i].X, chars[i].Y + 4);
+                Console.SetCursorPosition(chars[i].X, chars[i].Y + 5);
                 Console.Write(chars[i].Simb);
                 Thread.Sleep(50); // using System.Threading;
             }

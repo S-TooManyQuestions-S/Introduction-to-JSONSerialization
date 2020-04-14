@@ -44,6 +44,9 @@ We are noting elapsed time in both of UseClass and UseStruct methods.
 2. Added Console Fortnite Dancer
 ![Fortnite Dancer in Console](FortniteDancer.png)
 
+3. Added simple logging
+![Log Example](LogEx.png)
+
 ### **(All Rights reserved)**
 * **Developer Team**
   * https://github.com/TopYar 
