@@ -248,8 +248,11 @@ namespace JSONSerialization
             try
             {
                 // Открываем поток с доступом к записи в файл
-                using (FileStream stream = new FileStream("serialize.json", FileMode.OpenOrCreate,FileAccess.Write))
+                using (FileStream stream = new FileStream("serialize.json", FileMode.OpenOrCreate, FileAccess.Write))
                 {
+                    // Очищаем файл от предыдущего использования
+                    stream.SetLength(0);
+
                     // Сериализуем в файл
                     ser.WriteObject(stream, objs);
                 }

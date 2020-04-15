@@ -9,10 +9,14 @@ namespace Lib
     [DataContract]
     public class RGB
     {
-        [DataMember]
+        [DataMember(Name = "ColorName")]
         public string name;
-        [DataMember]
-        public byte r, g, b; 
+        [DataMember(Order = 0)]
+        public byte r;
+        [DataMember(Order = 1)]
+        public byte g;
+        [DataMember(Order = 2)]
+        public byte b; 
         /// <summary>
         /// Параметрический конструктор
         /// </summary>
