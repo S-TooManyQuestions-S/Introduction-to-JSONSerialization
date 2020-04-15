@@ -1,5 +1,5 @@
 # Introduction to JSON Serialization
-Small project-presentation as a training activity (15.04.2020) (DISCIPLINE: Programming; Faculty Of Computer Science)
+Small project-presentation as a training activity (15.04.2020) (DISCIPLINE: Programming; Faculty of Computer Science)
 
 This project is created for an illustration of working with such serialization type like JSON-serialization.
 
